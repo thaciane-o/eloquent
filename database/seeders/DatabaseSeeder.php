@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Aluno::factory(10)->create();
         \App\Models\Telefone::factory(10)->create();
         \App\Models\Livro::factory(100)->create();
-        \App\Models\Emprestimo::factory(50)->create();
+        \App\Models\Emprestimo::factory(10)->create();
     }
 }
