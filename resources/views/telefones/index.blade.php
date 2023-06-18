@@ -28,7 +28,7 @@
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white mt-3 pt-5 pb-2">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Lista de alunos</h1>
+                <h1 class="fw-bolder">Lista de telefones</h1>
                 {{-- <p class="lead">A functional Bootstrap 5 boilerplate for one page scrolling websites</p>
                 <a class="btn btn-lg btn-light" href="#about">Start scrolling!</a> --}}
             </div>
@@ -37,11 +37,9 @@
         <section id="about" class="p-2 m-2">
             <div class="container px-4">
                 <div class="mb-3">
-                    <a href="{{ route('alunos.create') }}">
-                        <button class="btn btn-sm btn-success">Novo aluno</button>
+                    <a href="{{ route('telefones.create') }}">
+                        <button class="btn btn-sm btn-success">Novo telefone</button>
                     </a>
-                </div>
-                <div class="mb-3">
                 </div>
                 <div class="table-responsive">
                     <table class="table">
@@ -49,21 +47,21 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Matrícula</th>
-                            <th scope="col">Endereço</th>
+                            <th scope="col">Número</th>
+                            <th scope="col">Aluno</th>
                             <th width="160">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($alunos as $aluno)
+                            @foreach ($telefones as $telefone)
                             <tr>
-                                <td>{{ $aluno->id }}</td>
-                                <td>{{ $aluno->nome }}</td>
-                                <td>{{ $aluno->matricula }}</td>
-                                <td>{{ $aluno->endereco }}</td>
+                                <td>{{ $telefone->id }}</td>
+                                <td>{{ $telefone->nome }}</td>
+                                <td>{{ $telefone->numero }}</td>
+                                <td>{{ $telefone->aluno_id }} - {{ $telefone->aluno->nome }}</td>
                                 <td>
-                                    <a href="{{ route('alunos.edit', [$aluno->id]) }}"><button class="btn btn-secondary btn-sm">Editar</button></a>
-                                    <a href="{{ route('alunos.delete', [$aluno->id]) }}"><button class="btn btn-danger btn-sm">Excluir</button></a>
+                                    <a href="{{ route('telefones.edit', [$telefone->id]) }}"><button class="btn btn-secondary btn-sm">Editar</button></a>
+                                    <a href="{{ route('telefones.delete', [$telefone->id]) }}"><button class="btn btn-danger btn-sm">Excluir</button></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -72,7 +70,7 @@
                 </div>
 
                 <div class="d-flex">
-                    {!! $alunos->links() !!}
+                    {!! $telefones->links() !!}
                 </div>
             </div>
         </section>

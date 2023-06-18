@@ -28,7 +28,7 @@
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white mt-3 pt-5 pb-2">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Lista de alunos</h1>
+            <h1 class="fw-bolder">Editando o empréstimo do livro: {{ $emprestimo->livro->nome }} feito pelo aluno {{ $emprestimo->aluno->nome }}</h1>
                 {{-- <p class="lead">A functional Bootstrap 5 boilerplate for one page scrolling websites</p>
                 <a class="btn btn-lg btn-light" href="#about">Start scrolling!</a> --}}
             </div>
@@ -36,44 +36,47 @@
 
         <section id="about" class="p-2 m-2">
             <div class="container px-4">
-                <div class="mb-3">
-                    <a href="{{ route('alunos.create') }}">
-                        <button class="btn btn-sm btn-success">Novo aluno</button>
+                <div>
+                    <a href="{{ route('emprestimos.index') }}">
+                        <button class="btn btn-sm btn-secondary">Voltar</button>
                     </a>
                 </div>
-                <div class="mb-3">
-                </div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Matrícula</th>
-                            <th scope="col">Endereço</th>
-                            <th width="160">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($alunos as $aluno)
-                            <tr>
-                                <td>{{ $aluno->id }}</td>
-                                <td>{{ $aluno->nome }}</td>
-                                <td>{{ $aluno->matricula }}</td>
-                                <td>{{ $aluno->endereco }}</td>
-                                <td>
-                                    <a href="{{ route('alunos.edit', [$aluno->id]) }}"><button class="btn btn-secondary btn-sm">Editar</button></a>
-                                    <a href="{{ route('alunos.delete', [$aluno->id]) }}"><button class="btn btn-danger btn-sm">Excluir</button></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="d-flex">
-                    {!! $alunos->links() !!}
-                </div>
+                <form class="mt-3" action="{{ route('emprestimos.update', [$emprestimo->aluno_id, $emprestimo->livro_id]) }}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                        <select class="form-select" name="aluno_id" aria-label="Default select example">
+                            @foreach ($alunos as $aluno)
+                                <option value="{{ $aluno->id }}" @if ($aluno->id === $emprestimo->aluno_id) selected @endif>
+                                    {{ $aluno->id }} - {{ $aluno->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <select class="form-select" name="livro_id" aria-label="Default select example">
+                            @foreach ($livros as $livro)
+                                <option value="{{ $livro->id }}" @if ($livro->id === $emprestimo->livro_id) selected @endif>
+                                    {{ $livro->id }} - {{ $livro->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="datahora" id="datahora" placeholder="Data e hora do empréstimo" value="{{ $emprestimo->datahora }}">
+                        <label for="floatingInput">Data e hora do empréstimo</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="data_devolucao" id="data_devolucao" placeholder="Data e hora da devolução" value="{{ $emprestimo->data_devolucao }}">
+                        <label for="floatingInput">Data e hora da devolução</label>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Salvar" />
+                </form>
             </div>
         </section>
 

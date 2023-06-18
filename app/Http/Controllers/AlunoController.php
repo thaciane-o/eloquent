@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aluno;
+use App\Models\Telefone;
+use App\Models\Emprestimo;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -16,8 +18,6 @@ class AlunoController extends Controller
     }
 
     public function store(Request $request) {
-        //return $request->all();
-
         $obj            = new Aluno();
         $obj->nome      = $request->nome;
         $obj->matricula = $request->matricula;
@@ -33,7 +33,6 @@ class AlunoController extends Controller
     }
 
     public function update(Request $request, $id) {
-
         $obj            = Aluno::findOrFail($id);
         $obj->nome      = $request->nome;
         $obj->matricula = $request->matricula;
@@ -45,6 +44,15 @@ class AlunoController extends Controller
 
     public function delete(Request $request, $id) {
         $obj = Aluno::findOrFail($id);
+        $telefones = Telefone::where('aluno_id', $obj->id)->get();
+        $emprestimos = Emprestimo::where('aluno_id', $obj->id)->delete();
+
+        if(!$telefones->isEmpty()) {
+            foreach ($telefones as $telefone) {
+                $telefone->delete();
+            }
+        }
+
         $obj->delete();
 
         return redirect()->route('alunos.index');

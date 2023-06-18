@@ -28,7 +28,7 @@
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white mt-3 pt-5 pb-2">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Lista de alunos</h1>
+                <h1 class="fw-bolder">Editando o livro: {{ $livro->nome }}</h1>
                 {{-- <p class="lead">A functional Bootstrap 5 boilerplate for one page scrolling websites</p>
                 <a class="btn btn-lg btn-light" href="#about">Start scrolling!</a> --}}
             </div>
@@ -36,44 +36,31 @@
 
         <section id="about" class="p-2 m-2">
             <div class="container px-4">
-                <div class="mb-3">
-                    <a href="{{ route('alunos.create') }}">
-                        <button class="btn btn-sm btn-success">Novo aluno</button>
+                <div>
+                    <a href="{{ route('livros.index') }}">
+                        <button class="btn btn-sm btn-secondary">Voltar</button>
                     </a>
                 </div>
-                <div class="mb-3">
-                </div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Matrícula</th>
-                            <th scope="col">Endereço</th>
-                            <th width="160">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($alunos as $aluno)
-                            <tr>
-                                <td>{{ $aluno->id }}</td>
-                                <td>{{ $aluno->nome }}</td>
-                                <td>{{ $aluno->matricula }}</td>
-                                <td>{{ $aluno->endereco }}</td>
-                                <td>
-                                    <a href="{{ route('alunos.edit', [$aluno->id]) }}"><button class="btn btn-secondary btn-sm">Editar</button></a>
-                                    <a href="{{ route('alunos.delete', [$aluno->id]) }}"><button class="btn btn-danger btn-sm">Excluir</button></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="d-flex">
-                    {!! $alunos->links() !!}
-                </div>
+                <form class="mt-3" action="{{ route('livros.update', [$livro->id]) }}" method="POST">
+                    @csrf
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do livro" value="{{ $livro->nome }}">
+                        <label for="floatingInput">Nome do livro</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="autor" id="autor" placeholder="Nome do autor" value="{{ $livro->autor }}">
+                        <label for="floatingInput">Nome do autor</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="isbn" id="isbn" placeholder="ISBN" value="{{ $livro->isbn }}">
+                        <label for="floatingInput">ISBN</label>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Salvar" />
+                </form>
             </div>
         </section>
 
