@@ -61,12 +61,12 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="datahora" id="datahora" placeholder="Data e hora de empréstimo">
+                        <input type="datetime-local" class="form-control" name="datahora" id="datahora" placeholder="Data e hora de empréstimo">
                         <label for="floatingInput">Data e hora do empréstimo</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="data_devolucao" id="data_devolucao" placeholder="Data e hora de devolução">
+                        <input type="datetime-local" class="form-control" name="data_devolucao" id="data_devolucao" placeholder="Data e hora de devolução">
                         <label for="floatingInput">Data e hora da devolução</label>
                     </div>
 

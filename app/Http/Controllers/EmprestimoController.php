@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Emprestimo;
 use App\Models\Aluno;
 use App\Models\Livro;
-use Carbon\Carbon;
 
 class EmprestimoController extends Controller
 {
@@ -26,8 +25,8 @@ class EmprestimoController extends Controller
         $emprestimo                 = new Emprestimo();
         $emprestimo->aluno_id       = $request->aluno_id;
         $emprestimo->livro_id       = $request->livro_id;
-        $emprestimo->datahora       = Carbon::createFromFormat('d/m/Y H:i', $request->datahora)->format('Y-m-d H:i:s');
-        $emprestimo->data_devolucao = Carbon::createFromFormat('d/m/Y H:i', $request->data_devolucao)->format('Y-m-d H:i:s');
+        $emprestimo->datahora       = $request->datahora;
+        $emprestimo->data_devolucao = $request->data_devolução;
         $emprestimo->save();
 
         return redirect()->route('emprestimos.index');

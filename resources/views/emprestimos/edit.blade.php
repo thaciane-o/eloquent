@@ -66,12 +66,12 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="datahora" id="datahora" placeholder="Data e hora do empréstimo" value="{{ $emprestimo->datahora }}">
+                        <input type="datetime-local" class="form-control" name="datahora" id="datahora" placeholder="Data e hora do empréstimo" value="{{ $emprestimo->datahora }}">
                         <label for="floatingInput">Data e hora do empréstimo</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="data_devolucao" id="data_devolucao" placeholder="Data e hora da devolução" value="{{ $emprestimo->data_devolucao }}">
+                        <input type="datetime-local" class="form-control" name="data_devolucao" id="data_devolucao" placeholder="Data e hora da devolução" value="{{ $emprestimo->data_devolucao }}">
                         <label for="floatingInput">Data e hora da devolução</label>
                     </div>
 

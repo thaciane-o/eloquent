@@ -46,12 +46,7 @@ class AlunoController extends Controller
         $obj = Aluno::findOrFail($id);
         $telefones = Telefone::where('aluno_id', $obj->id)->get();
         $emprestimos = Emprestimo::where('aluno_id', $obj->id)->delete();
-
-        if(!$telefones->isEmpty()) {
-            foreach ($telefones as $telefone) {
-                $telefone->delete();
-            }
-        }
+        $telefones = Telefone::where('aluno_id', $obj->id)->delete();
 
         $obj->delete();
 
